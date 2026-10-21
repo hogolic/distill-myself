@@ -1,0 +1,58 @@
+# ══════════════════════════════════════════
+#  Obsidian 仓库的 .gitignore
+#  核心原则：能重新生成的、含凭据的 → 不进 git
+#            你的笔记是唯一不可再生的东西
+# ══════════════════════════════════════════
+
+# ── Obsidian 的工作区状态 ──
+# 每次开关窗口、拖动面板都会变，进 git 只会制造"文件没改却显示已修改"的噪音
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+# 图谱视图设置：每打开一次图谱就被重写
+.obsidian/graph.json
+
+# ── 插件的登录凭据与本地状态 ──
+# data.json 里可能有 OAuth token（比如坚果云同步插件）
+# data.local.json 有些插件用来存几 MB 的模型目录
+# 换台机器本来就该重新登录、重新拉取
+.obsidian/plugins/*/data.json
+.obsidian/plugins/*/data.local.json
+
+# ── 回收站 ──
+.trash/
+
+# ── AI 工具的本地状态 ──
+.agents/
+.claude/
+.codex/
+.cursor/
+
+# ── 系统垃圾 ──
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+~$*.doc
+~$*.docx
+~$*.xls
+~$*.xlsx
+~$*.ppt
+~$*.pptx
+
+# ── 依赖与构建产物 ──
+node_modules/
+dist/
+__pycache__/
+*.pyc
+
+# ── 密钥 ──
+.env
+.env.*
+
+# ── 大文件（如果误放进来） ──
+# 视频/压缩包会让仓库变得很重，建议单独管理
+*.mp4
+*.mov
+*.zip
+*.7z
