@@ -1,0 +1,4 @@
+interface:
+  display_name: "人生档案访谈助手"
+  short_description: "像聊天一样回顾人生，由 AI 逐步提问并整理成可保存的个人档案"
+  default_prompt: "请使用 $life-archive，陪我从一个记得的片段开始，逐步整理我的人生档案。"

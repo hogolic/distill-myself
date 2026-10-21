@@ -617,18 +617,22 @@ git commit -m "init: 第二大脑骨架"
 
 ## 十、文件说明
 
-### 7 个文件，分四类
+### 两个 skill + 三份零件
 
 ```
-obsidian-second-brain/
-├── README.md                  ← 【说明书】你现在读的这份
-├── skill/
-│   └── SKILL.md               ← 【可安装】给 AI 执行的工具
-├── templates/                 ← 【零件】直接复制进你自己的库
+distill-myself/
+├── README.md                    ← 【说明书】你现在读的这份
+├── skills/                      ← 【可安装】给 AI 执行
+│   ├── obsidian-second-brain/
+│   │   └── SKILL.md             帮你搭这个库
+│   └── life-archive/
+│       ├── SKILL.md             帮你把过去整理成人生档案
+│       └── agents/openai.yaml   给 OpenAI 系工具用的界面配置
+├── templates/                   ← 【零件】直接复制进你自己的库
 │   ├── 笔记模板.md
 │   ├── 日记模板.md
 │   └── 资料模板.md
-└── boilerplate/               ← 【零件】改一改当自己的规则
+└── boilerplate/                 ← 【零件】改一改当自己的规则
     ├── README.md
     └── AGENTS.md
 ```
@@ -638,12 +642,31 @@ obsidian-second-brain/
 | 文件 | 是什么 | 怎么用 |
 |---|---|---|
 | **`README.md`** | **说明书** —— 讲这套方法怎么做的 | 读它。**你正在看的就是这份** |
-| **`skill/SKILL.md`** | **可安装的 skill** —— 装进 AI 工具后，一句话就能让 AI 带你搭 | 放进 skills 目录（见下）|
+| **`skills/obsidian-second-brain/`** | **搭库的 skill** —— 装进 AI 工具后，一句话就能让 AI 带你搭 | 放进 skills 目录（见下）|
+| **`skills/life-archive/`** | **人生档案的 skill** —— 逐轮访谈，把讲出来的过去整理成可核实的档案 | 同上 |
 | **`templates/笔记模板.md`** | 通用笔记的空壳（只有 front matter 骨架） | **直接复制**进你库的 `90-模板 Templates/` |
 | **`templates/日记模板.md`** | 日记模板，四节（含「和 AI 聊完之后的总结」） | **直接复制**进你库的 `90-模板 Templates/` |
 | **`templates/资料模板.md`** | 外部资料模板（来源 / 核心内容 / 我的判断 / 关联） | **直接复制**进你库的 `90-模板 Templates/` |
 | **`boilerplate/README.md`** | **你要放进自己库里那份 README 的模板** | 挪到库根目录，改名 `README.md`，改三处 |
 | **`boilerplate/AGENTS.md`** | **给 AI 的规矩的模板** | 挪到库根目录，改名 `AGENTS.md`，改三处 |
+
+### 两个 skill 的分工
+
+| | `obsidian-second-brain` | `life-archive` |
+|---|---|---|
+| 管什么 | **往后** —— 从今天开始记 | **往回** —— 把过去理出来 |
+| 输入 | 你零散的想法 | 你讲的人生片段 |
+| 输出 | 一套能用的目录和规则 | 分阶段的人生档案 |
+| 适合谁 | 想搭第二大脑、但笔记越记越乱 | 想回顾人生、又不想写作文 |
+
+**它们是同一件事的两端：都把「散的东西」蒸馏成「有结构的档案」。**
+
+> 📌 `life-archive` 最值得学的一点：它**先不让你读指南、填问卷、建目录** ——
+> 只问「你脑海里最先浮现的是哪个画面？」。**门槛降到这一步，人才讲得出来。**
+
+> ⚠️ **`life-archive` 会涉及隐私**。它的规则里写了：文件名不用真实姓名和学校全名、
+> 默认 `privacy: 私密`、公开分享要先做脱敏副本。
+> **但 `privacy` 只是个标签，不是加密** —— 别把真正的隐私内容推到公开仓库。
 
 ### ⚠️ 最容易搞混的：有两个 `README.md`
 
@@ -664,22 +687,26 @@ obsidian-second-brain/
 
 ### 怎么用 skill
 
-把 `skill/` 整个目录放进你的 AI 工具的 skills 目录：
+把 `skills/` 里**整个 skill 目录**（是那一层文件夹，不是里面的 SKILL.md）放进你的 AI 工具的 skills 目录：
 
 - **WorkBuddy**：`~/.workbuddy/skills/`
 - **Claude Code**：`~/.claude/skills/`
 
-> 📌 **skill 会用到仓库里的 `templates/` 和 `boilerplate/`。** 两种装法：
-> ① 最省事 —— 把整个仓库放在你库旁边，让 AI 直接读；
-> ② 想只装一个目录 —— 把 `templates/` 和 `boilerplate/` 复制进 `skill/` 里，再整体放进去。
+装完跟 AI 说：
+
+> **想搭库** →「用 obsidian-second-brain 这个 skill 帮我搭一个第二大脑」
 >
-> 只装 `SKILL.md` 一个文件也能跑（它写了退路），但模板和规则要现场手写。
+> **想整理过去** →「用 life-archive 这个 skill，陪我从一个记得的片段开始整理人生档案」
 
-然后跟 AI 说：
+第一个会带你走完第八节那七步；第二个会一轮问一个问题，边聊边整理成 Markdown。
 
-> **「用 obsidian-second-brain 这个 skill 帮我搭一个第二大脑」**
+> 📌 **两个 skill 分工不同，别混用**：
+> 一个管「**往后**」（从今天开始记），一个管「**往回**」（把过去理出来）。
+> 同时用也没问题，它们不抢文件。
 
-它会带你走完第八节那七步。
+> ⚠️ **`life-archive` 的产出请放私有库。** 它写的是你的人生经历 ——
+> 里面可能有家人的事、你不想公开的片段。
+> **这个仓库只放方法，不放你的档案。** 它自己也写了：`privacy: 私密` 只是个标签，不是加密。
 
 > 💡 **skill 和 README 的区别**：
 > README 是给**人**读的（讲清楚为什么这么做），skill 是给 **AI 执行**的（只讲做什么、怎么验收）。
